@@ -1,6 +1,9 @@
 <div align="center">
 <img width="200" src="https://avatars.githubusercontent.com/u/125568791?s=200&v=4"></img>
+
+<h1>Terceiro Gestor</h1>
 </div>
+
 
 <h6>Descrição do projeto:</h6>
 <p align="justify">

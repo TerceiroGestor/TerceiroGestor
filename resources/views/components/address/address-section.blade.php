@@ -2,13 +2,13 @@
 
     <div class="mb-4">
 
-        <button @click="$dispatch('open-modal', 'modal-address')" class="bg-indigo-600 text-white px-4 py-2 rounded">
+        <button @click="$dispatch('open-modal', 'modalAddress')" class="bg-indigo-600 text-white px-4 py-2 rounded">
             Novo Endereço
         </button>
 
-        <x-modal-form id="modal-address" title="Formulário de Endereço" width="w-[70vw]" height="h-[70vh]">
+        <x-main-modal id="modalAddress" title="Formulário de Endereço" width="w-[70vw]" height="h-[70vh]">
             @include('address.form')
-        </x-modal-form>
+        </x-main-modal>
     </div>
 
     <!-- Tabela com dados do endereço -->

@@ -1,8 +1,3 @@
-
-<!--
-    Criar tudo dentro da <div> para ser processado pelo Livewire
--->
-
 <div class="py-6 inline-block min-w-full align-middle sm:p-8 bg-white shadow sm:rounded-lg dark:bg-gray-700">
 
     <div class="flex justify-end">
@@ -25,17 +20,7 @@
                         Nome
                     </span>
                 </th>
-                <th>
-                    <span class="flex items-center">
-                        Email
-                    </span>
-                </th>
-                <th>
-                    <span class="flex items-center">
-                        Telefone
 
-                    </span>
-                </th>
                 <th>
                     <span class="flex items-center">
                         Nascimento
@@ -51,15 +36,11 @@
                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-800 dark:bg-gray-700">
                     <td class="font-medium text-black-900 whitespace-nowrap dark:text-white">
                         <img class="rounded-full w-8 h-8"
-                            src="{{ $person->photo ? asset('storage/' . $person->photo) : asset('images/default-user.png') }}"
+                            src="{{ $person->photo ? asset('storage/' . $person->photo) : asset('/favicon.ico') }}"
                             alt="Foto">
                     </td>
                     <td class="font-medium text-black-900 whitespace-nowrap dark:text-white">
                         {{ $person->social_name }}</td>
-                    <td>
-                        {{ $person->email }}</td>
-                    <td>
-                        {{ $person->phone }}</td>
                     <td>
                         {{ $person->birth_date }}</td>
 
@@ -81,9 +62,9 @@
         </tbody>
     </table>
 
-    <x-main-modal id="createPerson" title="Novo Cadastro" class="w-[60vw]">
+    <x-main-modal id="createPerson" title="Novo Cadastro" class="w-[80vw]">
 
-       @livewire('person.person-form', key('createPerson'))
+       @livewire('person.complete-form', key('createPerson'))
 
     </x-main-modal>
 

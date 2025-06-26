@@ -161,4 +161,16 @@ class Person extends Model
     {
         return $this->hasMany(\App\Models\Suspension::class, 'id', 'people_id');
     }
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
 }

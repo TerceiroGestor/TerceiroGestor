@@ -20,16 +20,16 @@ return new class extends Migration
             $table->enum('gender', ['Masculino', 'Feminino', 'Outros'])->nullable();
             $table->enum('ethnicity', ['Branca', 'Preta', 'Parda', 'Amarela', 'Indígena', 'Outro'])->nullable();
             $table->enum('marital_status', ['Solteiro(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)', 'Separado(a)', 'Outro' ])->nullable();
-            $table->string('country')->nullable();
-            $table->string('state')->nullable();
-            $table->string('city')->nullable();
+            $table->foreignId('country_id')->nullable()->constrained('countries');
+            $table->foreignId('state_id')->nullable()->constrained('states');
+            $table->foreignId('city_id')->nullable()->constrained('cities');
             $table->string('nis')->nullable();
             $table->string('cpf')->nullable()->unique();
             $table->string('rg')->nullable();
             $table->uuid('address_id')->nullable();
             $table->timestamps();
-
             $table->foreign('address_id')->references('id')->on('addresses')->onDelete('set null');
+            
         });
     }
 

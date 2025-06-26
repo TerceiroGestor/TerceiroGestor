@@ -56,7 +56,7 @@ class Person extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['photo', 'full_name', 'social_name', 'birth_date', 'gender', 'ethnicity', 'marital_status', 'country', 'state', 'city', 'nis', 'cpf', 'rg', 'address_id'];
+    protected $fillable = ['photo', 'full_name', 'social_name', 'birth_date', 'gender', 'ethnicity', 'marital_status', 'country_id', 'state_id', 'city_id', 'nis', 'cpf', 'rg', 'address_id'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

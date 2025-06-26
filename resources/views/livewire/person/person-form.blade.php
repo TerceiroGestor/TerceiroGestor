@@ -16,7 +16,7 @@
                         x-text="document.getElementById('photo')?.files[0]?.name || 'Nenhum arquivo selecionado'"></span>
                 </div>
                 <input wire:model.defer="photo" id="photo" name="photo" type="file" class="hidden"
-                    accept="image/*" @change="previewPhoto" />
+                    accept="image/png, image/jpeg" @change="previewPhoto" />
                 <x-input-error class="mt-2" :messages="$errors->get('photo')" />
             </div>
             <div id="foto" class="flex items-center">
@@ -144,8 +144,8 @@
             <legend class="text-sm font-semibold text-gray-700 px-2">Naturalidade</legend>
             <!-- País -->
             <div class="mb-3">
-                <x-input-label for="country" :value="__('Estado')" />
-                <select wire:model.defer="country" id="country" name="country"
+                <x-input-label for="country_id" :value="__('País')" />
+                <select wire:model.defer="country_id" id="country_id" name="country_id"
                     class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
                     <option value="">Selecione um estado</option>
                     @foreach ($countries as $country)
@@ -156,8 +156,8 @@
 
             <!-- Estado -->
             <div class="mb-3">
-                <x-input-label for="state" :value="__('Estado')" />
-                <select wire:model.defer="state" id="state" name="state"
+                <x-input-label for="state_id" :value="__('Estado')" />
+                <select wire:model.defer="state_id" id="state_id" name="state_id"
                     class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
                     <option value="">Selecione um estado</option>
                     @foreach ($states as $state)
@@ -168,8 +168,8 @@
 
             <!-- Cidade -->
             <div class="mb-3">
-                <x-input-label for="city" :value="__('Cidade')" />
-                <select wire:model.defer="city" id="city" name="city"
+                <x-input-label for="city_id" :value="__('Cidade')" />
+                <select wire:model.defer="city_id" id="city_id" name="city_id"
                     class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
                     <option value="">Selecione uma cidade</option>
                     @foreach ($cities as $city)

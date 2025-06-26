@@ -4,8 +4,8 @@ namespace App\Livewire\Person\Components;
 
 use Livewire\Component;
 use App\Traits\HasNotification;
-use Livewire\Attributes\On;
 use App\Livewire\Traits\HandlesModals;
+use Livewire\Attributes\On;
 use App\Services\ContactService;
 
 class Contacts extends Component

@@ -35,17 +35,15 @@ $watch('sidebarToggle', value => localStorage.setItem('sidebarToggle', JSON.stri
     <div class="flex h-screen overflow-hidden">
 
         <!-- ===== Sidebar Start ===== -->
-        <x-elements.sidebar />
+        <x-layouts.sidebar />
         <!-- ===== Sidebar End ===== -->
-
-       
 
         <!-- ===== Content Area Start ===== -->
         <div class="relative flex flex-col flex-1 overflow-x-hidden overflow-y-auto">
 
-            <x-elements.overlay />
+            <x-layouts.overlay />
 
-            <x-elements.header />
+            <x-layouts.header />
 
             <main>
                 <div class="p-4 mx-auto max-w-screen-2xl md:p-6">

@@ -22,15 +22,20 @@ class PersonShow extends Component
     public function mount($personId)
     {
         $this->personId = $personId;
+        $this->person = Person::findOrFail($this->personId);
+        
+        // Debug opcional
+        if (!$this->person->country_id) {
+            logger("Pessoa {$this->person->id} sem country_id");
+        }
+
         $this->refreshPerson();
     }
 
-    public function refreshPerson()
-    {
-        $this->person = Person::findOrFail($this->personId);
-    }
+    public function refreshPerson() {}
 
-    public function edit($personId){
+    public function edit($personId)
+    {
         $this->dispatch('formEditPerson', $personId);
     }
 

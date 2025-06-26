@@ -33,9 +33,9 @@ class PersonForm extends Component
     public $gender;
     public $ethnicity;
     public $marital_status;
-    public $country;
-    public $state;
-    public $city;
+    public $country_id;
+    public $state_id;
+    public $city_id;
     public $nis;
     public $cpf;
     public $rg;
@@ -48,9 +48,9 @@ class PersonForm extends Component
         'gender' => 'nullable|string',
         'ethnicity' => 'nullable|string',
         'marital_status' => 'nullable|string',
-        'country' => 'nullable|string',
-        'state' => 'nullable|string',
-        'city' => 'nullable|string',
+        'country_id' => 'nullable|string',
+        'state_id' => 'nullable|string',
+        'city_id' => 'nullable|string',
         'nis' => 'nullable|string',
         'cpf' => 'nullable|string',
         'rg' => 'nullable|string'

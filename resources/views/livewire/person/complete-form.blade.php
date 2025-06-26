@@ -27,7 +27,9 @@
     </div>
 
     <div x-show="step === 2" class=''>
-
+        @if ($person)
+            <livewire:person.components.addresses :person="$person" :key="'person-address-' . $person->id" />
+        @endif
     </div>
 
     <div x-show="step === 3" class="">

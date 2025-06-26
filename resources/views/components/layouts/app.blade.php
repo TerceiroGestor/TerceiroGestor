@@ -35,23 +35,18 @@ $watch('sidebarToggle', value => localStorage.setItem('sidebarToggle', JSON.stri
     <div class="flex h-screen overflow-hidden">
 
         <!-- ===== Sidebar Start ===== -->
-        <x-sidebar />
+        <x-elements.sidebar />
         <!-- ===== Sidebar End ===== -->
 
-        <!-- Header fixo no topo -->
-        <header class="fixed top-0 left-0 right-0 z-40">
-            <x-header />
-        </header>
+       
 
         <!-- ===== Content Area Start ===== -->
         <div class="relative flex flex-col flex-1 overflow-x-hidden overflow-y-auto">
-            <!-- Small Device Overlay Start -->
-            <x-overlay />
-            <!-- Small Device Overlay End -->
-            <!-- ===== Header Start ===== -->
-            <x-header />
-            <!-- ===== Header End ===== -->
-            <!-- ===== Main Content Start ===== -->
+
+            <x-elements.overlay />
+
+            <x-elements.header />
+
             <main>
                 <div class="p-4 mx-auto max-w-screen-2xl md:p-6">
                     {{ $slot }}

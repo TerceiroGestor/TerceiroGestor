@@ -28,7 +28,7 @@
         </fieldset>
 
         <!-- Dados Pessoais -->
-        <fieldset class="border border-gray-300 rounded p-6 col-span-2 mt-4 grid grid-cols-2 gap-4">
+        <fieldset class="border border-gray-300 rounded p-6 col-span-2 mt-4 grid grid-cols-3 gap-4">
             <legend class="text-sm font-semibold text-gray-700 px-2">Dados Pessoais</legend>
             <div class="col-span-2">
                 <x-input-label for="full_name" :value="__('Nome Completo')" />
@@ -115,7 +115,7 @@
         </fieldset>
 
         <!-- Documentação Pessoal -->
-        <fieldset class="border border-gray-300 rounded p-6 col-span-2 mt-4">
+        <fieldset class="border border-gray-300 rounded p-6 col-span-2 mt-4 grid grid-cols-3 gap-4 ">
             <legend class="text-sm font-semibold text-gray-700 px-2">Documentação Pessoal</legend>
             <div>
                 <x-input-label for="nis" :value="__('NIS')" />
@@ -140,43 +140,42 @@
         </fieldset>
 
         <!-- Naturalidade -->
-        <fieldset class="border border-gray-300 rounded p-6 col-span-2 mt-4">
+        <fieldset class="border border-gray-300 rounded p-6 col-span-2 mt-4 grid grid-cols-3 gap-4 ">
             <legend class="text-sm font-semibold text-gray-700 px-2">Naturalidade</legend>
-            <div class="grid grid-cols-2 gap-3" x-data="selectCountryStateCity()" x-init="init()">
+            <!-- País -->
+            <div class="mb-3">
+                <x-input-label for="country" :value="__('Estado')" />
+                <select wire:model.defer="country" id="country" name="country"
+                    class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                    <option value="">Selecione um estado</option>
+                    @foreach ($countries as $country)
+                        <option value="{{ $country->id }}">{{ $country->name }}</option>
+                    @endforeach
+                </select>
+            </div>
 
-                <!-- País -->
-                <div class="mb-3">
-                    <x-input-label for="country" :value="__('País')" />
-                    <select wire:model.defer="country" id="country" name="country" x-model="selectedCountry"
-                        x-html="renderOptions(countries, selectedCountry)"
-                        class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                    </select>
-                </div>
+            <!-- Estado -->
+            <div class="mb-3">
+                <x-input-label for="state" :value="__('Estado')" />
+                <select wire:model.defer="state" id="state" name="state"
+                    class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                    <option value="">Selecione um estado</option>
+                    @foreach ($states as $state)
+                        <option value="{{ $state->id }}">{{ $state->name }}</option>
+                    @endforeach
+                </select>
+            </div>
 
-                <!-- Estado -->
-                <div class="mb-3">
-                    <x-input-label for="state" :value="__('Estado')" />
-                    <select wire:model.defer="state" id="state" name="state"
-                        class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                        <option value="">Selecione um estado</option>
-                        @foreach ($states as $state)
-                            <option value="{{ $state->id }}">{{ $state->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Cidade -->
-                <div class="mb-3">
-                    <x-input-label for="city" :value="__('Cidade')" />
-                    <select wire:model.defer="city" id="city" name="city"
-                        class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                        <option value="">Selecione uma cidade</option>
-                        @foreach ($cities as $city)
-                            <option value="{{ $city->id }}">{{ $city->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
+            <!-- Cidade -->
+            <div class="mb-3">
+                <x-input-label for="city" :value="__('Cidade')" />
+                <select wire:model.defer="city" id="city" name="city"
+                    class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                    <option value="">Selecione uma cidade</option>
+                    @foreach ($cities as $city)
+                        <option value="{{ $city->id }}">{{ $city->name }}</option>
+                    @endforeach
+                </select>
             </div>
 
         </fieldset>

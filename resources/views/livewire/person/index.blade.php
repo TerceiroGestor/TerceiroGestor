@@ -2,7 +2,7 @@
 
     <div class="flex justify-end">
         <button x-on:click="$dispatch('open-modal', { id: 'createPerson' })"
-            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">
             Novo
         </button>
     </div>
@@ -36,7 +36,7 @@
                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-800 dark:bg-gray-700">
                     <td class="font-medium text-black-900 whitespace-nowrap dark:text-white">
                         <img class="rounded-full w-8 h-8"
-                            src="{{ $person->photo ? asset('storage/' . $person->photo) : asset('/favicon.ico') }}"
+                            src="{{ $person->photo ? asset('storage/' . $person->photo) : asset('storage/image/profile.png') }}"
                             alt="Foto">
                     </td>
                     <td class="font-medium text-black-900 whitespace-nowrap dark:text-white">
@@ -45,14 +45,14 @@
                         {{ $person->birth_date }}</td>
 
                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
-                        <div class="inline-flex rounded-md shadow-xs" role="group">
+                        <div>
                             <button type="button"
-                                class="cursor-pointer focus:outline-none text-white bg-green-400 hover:bg-green-500 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900"
+                                class="cursor-pointer shadow-xs focus:outline-none text-white bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900"
                                 onclick="window.location.href='{{ route('person.show', $person->id) }}'">
-                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z" />
+                                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                                 </svg>
                             </button>
                         </div>
@@ -64,7 +64,7 @@
 
     <x-main-modal id="createPerson" title="Novo Cadastro" class="w-[80vw]">
 
-       @livewire('person.complete-form', key('createPerson'))
+        @livewire('person.complete-form', key('createPerson'))
 
     </x-main-modal>
 

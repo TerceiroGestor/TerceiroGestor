@@ -9,6 +9,7 @@ use App\Livewire\Traits\HandlesModals;
 use App\Models\Person;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Http;
+use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
 
@@ -21,6 +22,7 @@ class PersonForm extends Component
     public $personId;
     public $person;
 
+    public $countries;
     public $states;
     public $cities;
 
@@ -57,10 +59,11 @@ class PersonForm extends Component
     protected $listeners = ['formEditPerson' => 'edit'];
 
     public function mount($personId = null)
-    {
+    {   
+        $this->countries = Country::orderBy('name')->get();
         $this->states = State::orderBy('name')->get();
         $this->cities = City::orderBy('name')->get();
-
+        
         if ($personId) {
             $person = Person::findOrFail($this->personId);
             $this->personId = $person->id;
@@ -85,7 +88,8 @@ class PersonForm extends Component
         } else {
             $person = Person::create($data);
             $this->dispatch('personCreated', $person->id);
-            $this->closeModal('createPerson');
+            $this->dispatch('CompleteFormReload', $person->id);
+            //$this->closeModal('createPerson');
             $this->sweetSuccess("Sucesso!", "<span class='text-blue-500'>{$person->full_name}</span> foi adicionado!");
         }
 

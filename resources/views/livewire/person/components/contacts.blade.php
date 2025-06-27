@@ -1,29 +1,34 @@
-<div>
-    <div class="flex justify-end items-center mb-2">
-        <button wire:click="resetFields()" x-on:click="$dispatch('open-modal', { id: 'contact' })"
-            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-            Novo Contato
-        </button>
-    </div>
+<div class="my-6">
+    {{-- Contatos --}}
+    <div class="p-5 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6 space-y-4 relative">
+        {{-- Título e Botão Novo --}}
+        <div class="flex items-center justify-between mb-2">
+            <h5 class="text-base font-semibold text-gray-700 dark:text-gray-200">Contatos</h5>
 
-    @if (count($contacts) > 0)
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th scope="col" class="px-6 py-3">Tipo</th>
-                    <th scope="col" class="px-6 py-3">Valor</th>
-                    <th scope="col" class="px-6 py-3">Principal</th>
-                    <th scope="col" class="px-6 py-3">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
+            <button wire:click="resetFields()" x-on:click="$dispatch('open-modal', { id: 'contact' })"
+                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">
+                Novo Contato
+            </button>
+        </div>
+
+        @if (count($contacts) > 0)
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach ($contacts as $contact)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                        <th scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $contact->type }}
-                        </th>
-                        <td class="px-6 py-4">
+                    <div
+                        class="p-4 border border-gray-200 rounded-xl dark:border-gray-700 bg-white dark:bg-gray-900 shadow-sm">
+                        <div class="flex items-center justify-between mb-2">
+                            <h6 class="text-sm font-medium text-gray-800 dark:text-gray-100">
+                                {{ $contact->type }}
+                            </h6>
+                            @if ($contact->main)
+                                <span
+                                    class="text-xs text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300 px-2 py-0.5 rounded-full">
+                                    Principal
+                                </span>
+                            @endif
+                        </div>
+
+                        <div class="text-sm text-gray-600 dark:text-gray-300 mb-3">
                             @if ($contact->type === 'WhatsApp')
                                 <a href="https://wa.me/{{ $contact->value }}" target="_blank"
                                     class="text-green-600 hover:underline">
@@ -31,25 +36,31 @@
                                 </a>
                             @elseif ($contact->type === 'Celular')
                                 {{ preg_replace('/(\d{2})(\d{5})(\d{4})/', '($1) $2-$3', $contact->value) }}
-                            @elseif ($contact->type === 'Email')
+                            @else
                                 {{ $contact->value }}
                             @endif
-                        </td>
-                        <td class="px-6 py-4">{{ $contact->main ? 'Principal' : '' }}</td>
-                        <td class="px-6 py-4">
+                        </div>
+
+                        <div class="flex gap-4 text-sm">
                             <button wire:click="edit('{{ $contact->id }}')"
                                 x-on:click="$dispatch('open-modal', { id: 'contact' })"
-                                class="text-blue-600 hover:underline">Editar</button>
+                                class="text-blue-600 hover:underline">
+                                Editar
+                            </button>
                             <button wire:click="contactDelete('{{ $contact->id }}')"
-                                class="text-red-600 hover:underline">Remover</button>
-                        </td>
-                    </tr>
+                                class="text-red-600 hover:underline">
+                                Remover
+                            </button>
+                        </div>
+                    </div>
                 @endforeach
-            </tbody>
-        </table>
-    @else
-        <p class="text-gray-500 mt-4">Nenhum contato encontrado.</p>
-    @endif
+            </div>
+        @else
+            <p class="text-sm text-gray-500 dark:text-gray-400 italic">Nenhum contato encontrado.</p>
+        @endif
+    </div>
+
+
 
     <x-main-modal id="contact" title="{{ $contactId ? 'Editar Contato' : 'Novo Contato' }}" class="w-[60vw]">
 
@@ -71,7 +82,8 @@
 
             <div>
                 <label for="value" class="block font-semibold mb-1">Valor</label>
-                <input id="value" type="text" wire:model.defer="contact.value" class="w-full border rounded px-3 py-2" />
+                <input id="value" type="text" wire:model.defer="contact.value"
+                    class="w-full border rounded px-3 py-2" />
                 @error('value')
                     <span class="text-red-600 text-sm">{{ $message }}</span>
                 @enderror

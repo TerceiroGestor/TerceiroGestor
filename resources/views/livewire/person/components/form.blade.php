@@ -1,6 +1,4 @@
-<div class="w-full" x-data">
-
-
+<div class="w-full">
     <form wire:submit.prevent="save" x-ref="form">
         @csrf
         <!-- Foto -->

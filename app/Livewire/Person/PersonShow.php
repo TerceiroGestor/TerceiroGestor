@@ -21,15 +21,13 @@ class PersonShow extends Component
 
     public function mount($personId)
     {
-        $this->personId = $personId;
-        $this->person = Person::findOrFail($this->personId);
-        
-        // Debug opcional
-        if (!$this->person->country_id) {
-            logger("Pessoa {$this->person->id} sem country_id");
-        }
-
-        $this->refreshPerson();
+        $this->person = Person::with([
+            'address',
+            'contacts',
+            'country',
+            'state',
+            'city'
+        ])->find($this->personId);
     }
 
     public function refreshPerson() {}

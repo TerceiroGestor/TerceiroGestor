@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Person;
+namespace App\Livewire\Person\Components;
 
 use Livewire\Component;
 use App\Traits\HasNotification;
@@ -13,7 +13,7 @@ use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
 
-class PersonForm extends Component
+class Form extends Component
 {
 
     use HasNotification, HandlesModals, WithFileUploads;
@@ -145,6 +145,6 @@ class PersonForm extends Component
 
     public function render()
     {
-        return view('livewire.person.person-form');
+        return view('livewire.person.components.form');
     }
 }

@@ -19,6 +19,7 @@ class Addresses extends Component
     public $addressId;
     public $person;
     public $personId;
+    public $map;
 
     protected $rules = [
         'postal_code' => 'nullable|string',
@@ -44,8 +45,11 @@ class Addresses extends Component
     public function mount($person)
     {
         $this->person = $person;
-        $this->address = Address::findOrFail($person->address_id);
         $this->personId = $person->id;
+        if ($person->address_id) {
+            $this->loadAddress();
+            $this->createLinkMap();
+        }
     }
 
     public function loadAddress()
@@ -140,6 +144,15 @@ class Addresses extends Component
         $this->country = 'Brasil';
 
         $this->sweetSuccess('Sucesso!', 'Cep encontrado!');
+    }
+
+    public function createLinkMap()
+    {
+        $query = urlencode(
+            "{$this->person->address->street}, {$this->person->address->number}, {$this->person->address->district}, {$this->person->address->postal_code}",
+        );
+
+        $this->map = "https://www.google.com/maps/search/?api=1&query={$query}";
     }
 
 

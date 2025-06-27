@@ -53,8 +53,9 @@ class Addresses extends Component
     }
 
     public function loadAddress()
-    {
-        $this->address = $this->person->address()->get();
+    {   
+        $this->address = $this->person->address;
+        $this->dispatch('updatePerson');
     }
 
     public function resetFields()
@@ -77,40 +78,38 @@ class Addresses extends Component
     public function save()
     {
         $data = $this->validate();
+
+        // Normalize campos críticos
+        $data['complement'] = trim(strtolower($data['complement'] ?? ''));
+
         $person = Person::findOrFail($this->personId);
 
-        // 2. Verifica se já existe um endereço (por exemplo, com base em CEP e número)
+        // Verifica existência do endereço completo
         $existingAddress = Address::where('postal_code', $data['postal_code'])
             ->where('number', $data['number'])
-            ->where('street', $data['street']) // ajuste os critérios conforme seu modelo
+            ->where('street', $data['street'])
+            ->whereRaw('LOWER(TRIM(complement)) = ?', [$data['complement']])
             ->first();
 
         if ($existingAddress) {
-
-            // Endereço já existe — usa o mesmo
+            $existingAddress->update($data);
             $address = $existingAddress;
-
-            // Atualiza os dados se necessário
-            $address->update($data);
 
             $message = "O endereço <span class='text-blue-500'>{$address->street}, {$address->number}</span> foi atualizado!";
         } else {
-            // Cria novo endereço
             $address = Address::create($data);
-
             $message = "O endereço <span class='text-blue-500'>{$address->street}, {$address->number}</span> foi adicionado!";
         }
 
-        // 3. Atualiza o ID do endereço da pessoa
         $person->address_id = $address->id;
         $person->save();
 
-        // 4. Pós-processo (recarregar dados, limpar formulário, fechar modal, etc.)
-        $this->loadAddress(); // se houver
-        $this->resetFields();   // se houver
+        $this->loadAddress(); // opcional
+        $this->resetFields();
         $this->closeModal('address');
         $this->sweetSuccess('Sucesso!', $message);
     }
+
 
     public function updatedPostalCode($value)
     {

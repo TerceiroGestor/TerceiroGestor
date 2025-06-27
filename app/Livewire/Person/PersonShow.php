@@ -30,7 +30,9 @@ class PersonShow extends Component
         ])->find($this->personId);
     }
 
-    public function refreshPerson() {}
+    public function refreshPerson($personId) {
+        $this->person = Person::findOrFail($this->personId);
+    }
 
     public function edit($personId)
     {
